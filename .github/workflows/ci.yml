@@ -1,8 +1,8 @@
 name: Ant CI sample 
 on: push 
-runs-on: ubuntu-latest
 jobs: 
   ant-build: 
+    runs-on: ubuntu-latest
     container: frekele/ant:latest
     steps: 
     - name: checkout 
