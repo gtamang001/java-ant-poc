@@ -14,7 +14,11 @@ jobs:
           java-version: '11'
           distribution: 'adopt'
       - name: Build with Ant
-        run: ant -buildfile build.xml  
+        run: |
+          ant clean
+          ant compile
+          ant jar
+          ant run
         
 # name: Ant CI sample 
 # on: push 
