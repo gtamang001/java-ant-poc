@@ -1,20 +1,38 @@
-name: Ant CI sample 
-on: push 
-jobs: 
-  ant-build: 
+
+name: Java CI
+
+on: [push]
+
+jobs:
+  build:
     runs-on: ubuntu-latest
-    container: frekele/ant:latest
-    steps: 
-    - name: checkout 
-      uses: actions/checkout@v2
-    - name: setup java 8
-      uses: actions/setup-java@v2
-      with: 
-        distribution: 'temurin'
-        java-version: '11'
-    - name: ant build 
-      run: |
-        ant clean
-        ant compile 
-        ant jar 
-        ant run  
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up JDK 11
+        uses: actions/setup-java@v2
+        with:
+          java-version: '11'
+          distribution: 'adopt'
+      - name: Build with Ant
+        run: ant -noinput -buildfile build.xml  
+        
+# name: Ant CI sample 
+# on: push 
+# jobs: 
+#   ant-build: 
+#     runs-on: ubuntu-latest
+#     container: frekele/ant:latest
+#     steps: 
+#     - name: checkout 
+#       uses: actions/checkout@v2
+#     - name: setup java 8
+#       uses: actions/setup-java@v2
+#       with: 
+#         distribution: 'temurin'
+#         java-version: '11'
+#     - name: ant build 
+#       run: |
+#         ant clean
+#         ant compile 
+#         ant jar 
+#         ant run  
