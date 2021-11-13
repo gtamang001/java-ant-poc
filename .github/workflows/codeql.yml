@@ -9,31 +9,24 @@ on:
     - cron: '15 5 * * 3'
 
 jobs:
-  analyze:
-    name: Analyze
+  codeql-build:
     runs-on: ubuntu-latest
-    permissions:
-      security-events: write
-      actions: read
-
     strategy:
       fail-fast: false
       matrix:
-        language: [java]
-
-    # Specify the container in which actions will run
-    container:
-      image: codeql-container:f0f91db
+        language: ['java']
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
       - name: Initialize CodeQL
         uses: github/codeql-action/init@v1
-        with:
-          languages: ${{ matrix.language }}
-      - name: Build
-        run: |
-          ant clean
+
+      - name: Autobuild
+        uses: github/codeql-action/autobuild@v1
+
+      # - name: Build
+      #   run: |
+      #     ant clean
       - name: Perform CodeQL Analysis
         uses: github/codeql-action/analyze@v1
