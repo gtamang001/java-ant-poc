@@ -11,6 +11,7 @@ on:
 jobs:
   codeql-analysis:
     runs-on: ubuntu-latest
+    container: gtamang/ant-poc:latest
     strategy:
       fail-fast: false
       matrix:
